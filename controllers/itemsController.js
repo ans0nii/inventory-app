@@ -1,7 +1,7 @@
 const db = require("../db/queries");
 
-exports.itemsListGet = (req,res) => {
-
+exports.itemsListGet = async (req,res) => {
+    await getAllItems
 }
 
 exports.items = (req,res) => {
