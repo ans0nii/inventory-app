@@ -14,12 +14,13 @@ async function getItemById(id) {
 
 async function createItem(name, brand, price, year, description, category_id) {
   const { rows } = await pool.query(
-    "INSERT INTO items (name, brand, price, year, description, category_id) VALUES ($1, $2, $3, $4, $5, $6 RETURNING *",
+    "INSERT INTO items (name, brand, price, year, description, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
     [name, brand, price, year, description, category_id]
   );
   return rows[0];
 }
-// Update existing item
+
+
 async function updateItem(
   id,
   name,
@@ -28,25 +29,55 @@ async function updateItem(
   year,
   description,
   category_id
-) {}
+) {
+  const { rows } = await pool.query(
+    "UPDATE items SET name = $1, brand = $2, price = $3, year = $4, description = $5, category_id = $6 WHERE id = $7 RETURNING *",
+    [name, brand, price, year, description, category_id, id]
+  );
+  return rows[0];
+}
 
-// Delete item
-async function deleteItem(id) {}
 
-// Get all categories
-async function getAllCategories() {}
+async function deleteItem(id) {
+  await pool.query("DELETE FROM items WHERE id = $1", [id]);
+}
 
-// Get single category by id
-async function getCategoryById(id) {}
 
-// Create new category
-async function createCategory(name, description) {}
+async function getAllCategories() {
+  const { rows } = await pool.query("SELECT * FROM categories");
+  return rows;
+}
 
-// Update category
-async function updateCategory(id, name, description) {}
 
-// Delete category
-async function deleteCategory(id) {}
+async function getCategoryById(id) {
+  const { rows } = await pool.query("SELECT * FROM categories WHERE id = $1", [
+    id,
+  ]);
+  return rows[0];
+}
+
+
+async function createCategory(name, description) {
+  const { rows } = await pool.query(
+    "INSERT INTO categories (name, description) VALUES ($1, $2) RETURNING *",
+    [name, description]
+  );
+  return rows[0];
+}
+
+
+async function updateCategory(id, name, description) {
+  const { rows } = await pool.query(
+    "UPDATE categories SET name = $1, description = $2 WHERE id = $3 RETURNING *",
+    [name, description, id]
+  );
+  return rows[0];
+}
+
+
+async function deleteCategory(id) {
+  await pool.query("DELETE FROM categories WHERE id = $1", [id]);
+}
 
 module.exports = {
   getAllItems,
