@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Items</title>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <% items.forEach(item => { %>
+        <li>
+          <%=item.year %> <%=item.brand %> <%= item.name %> <br />
+          $<%=item.price %> <br />
+          <%=item.description %>
+          <a href="/items/<%= item.id%>">View Details</a>
+        </li>
+        <% }); %>
+      </ul>
+      <a href="/items/new">Add New Motorcycles Here!</a>
+      <br />
+      <a href="/">Back to Home</a>
+    </div>
+  </body>
+</html>

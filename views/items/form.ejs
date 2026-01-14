@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= item ? 'Edit' : 'New' %> item</title>
+  </head>
+  <body>
+    <h1><%= item ? 'Edit' : 'Create' %> item</h1>
+
+    <form
+    method="POST"
+    action="<%= item ? '/items/' + item.id + '/update' : '/items/new' %>"
+    >
+    <label>Model:</label>
+    <input
+    type="text"
+    name="name"
+    value="<%= item ? item.name : '' %>"
+    required
+    />
+
+    <label>Description:</label>
+    <textarea name="description">
+    <%= item ? item.description : '' %></textarea
+    >
+
+    <label>Brand:</label>
+    <input
+    type="text"
+    name="brand"
+    value="<%= item ? item.brand : '' %>"
+    required
+    />
+
+    <label>Year:</label>
+    <input
+    type="text"
+    name="year"
+    value="<%= item ? item.year : '' %>"
+    required
+    />
+
+    <label>Price:</label>
+    <input
+    type="text"
+    name="price"
+    value="<%= item ? item.price : '' %>"
+    required
+    />
+
+    <label>Category:</label>
+    <select name="category_id" required>
+    <% categories.forEach(category => { %>
+    <option value="<%= category.id %>" <%= item && item.category_id === category.id ? 'selected' : '' %>>
+    <%= category.name %>
+    </option>
+    <% }); %>
+    </select>
+    <button type="submit">Save</button>
+    </form>
+
+    <a href="/items">Back to List</a>
+  </body>
+</html>

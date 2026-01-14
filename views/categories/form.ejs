@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= category ? 'Edit' : 'New' %> Category</title>
+  </head>
+  <body>
+    <h1><%= category ? 'Edit' : 'Create' %> Category</h1>
+    
+    <form method="POST" action="<%= category ? '/categories/' + category.id + '/update' : '/categories/new' %>">
+      <label>Name:</label>
+      <input type="text" name="name" value="<%= category ? category.name : '' %>" required>
+      
+      <label>Description:</label>
+      <textarea name="description"><%= category ? category.description : '' %></textarea>
+      
+      <button type="submit">Save</button>
+    </form>
+    
+    <a href="/categories">Back to List</a>
+  </body>
+</html>

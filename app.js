@@ -11,6 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);
 
+app.get("/", (req, res) => {
+    res.render('index')
+})
 const PORT = 3000;
 app.listen(PORT, (error) => {
     if(error){

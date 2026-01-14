@@ -2,11 +2,12 @@ const db = require("../db/queries");
 
 exports.itemsListGet = async (req, res) => {
   const items = await db.getAllItems();
-  res.send("Items: " + items.map((item) => item.name).join(", "));
+  res.render("items/list", {items});
 };
 
-exports.itemsCreateGet = (req, res) => {
-  res.render("items/form");
+exports.itemsCreateGet = async (req, res) => {
+  const categories = await db.getAllCategories();
+  res.render("items/form", {item: null, categories});
 };
 
 exports.itemsCreatePost = async (req, res) => {
@@ -18,7 +19,7 @@ exports.itemsCreatePost = async (req, res) => {
 exports.itemsDetailGet = async (req, res) => {
   const id = req.params.id;
   const item = await db.getItemById(id);
-  res.send(JSON.stringify(item));
+  res.render("items/detail", {item})
 };
 
 exports.itemsDeletePost = async (req, res) => {
@@ -28,7 +29,8 @@ exports.itemsDeletePost = async (req, res) => {
 
 exports.itemsUpdateGet = async (req, res) => {
   const item = await db.getItemById(req.params.id);
-  res.render("items/form", { item });
+  const categories =  await db.getAllCategories();
+  res.render("items/form", { item, categories });
 };
 
 exports.itemsUpdatePost = async (req, res) => {

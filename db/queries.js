@@ -42,6 +42,7 @@ async function deleteItem(id) {
   await pool.query("DELETE FROM items WHERE id = $1", [id]);
 }
 
+//Categories
 
 async function getAllCategories() {
   const { rows } = await pool.query("SELECT * FROM categories");
