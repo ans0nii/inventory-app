@@ -6,7 +6,7 @@ exports.categoriesListGet = async (req, res) => {
 };
 
 exports.categoriesCreateGet = (req, res) => {
-  res.render("categories/form", {categories: null});
+  res.render("categories/form", {category: null});
 };
 
 exports.categoriesCreatePost = async (req, res) => {
@@ -18,7 +18,7 @@ exports.categoriesCreatePost = async (req, res) => {
 exports.categoriesDetailGet = async (req, res) => {
   const id = req.params.id;
   const category = await db.getCategoryById(id);
-  res.render("category/detail", {category})
+  res.render("categories/detail", {category})
 };
 
 exports.categoriesDeletePost = async (req, res) => {

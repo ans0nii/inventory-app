@@ -13,5 +13,18 @@
       </li>
     </ul>
     <a href="/items">Back to list</a>
+    <hr />
+    <a href="/items/<%= item.id %>/update">Edit Item</a> |
+    <form
+      method="POST"
+      action="/items/<%= item.id %>/delete"
+      style="display: inline"
+    >
+      <button type="submit" onclick="return confirm('Delete this item?')">
+        Delete
+      </button>
+    </form>
+    <br /><br />
+    <a href="/items">Back to Items</a>
   </body>
 </html>
