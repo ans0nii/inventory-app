@@ -1,13 +1,24 @@
-const { Router } = require("express");
-const itemsController = require("../controllers/itemsController");
+import {
+  getAllItems,
+  getItemById,
+  getAllCategories,
+  createItem,
+  updateItem,
+  deleteItem,
+} from "../db/queries";
+import express from "express";
+const { Router } = express;
 const itemsRouter = Router();
 
-itemsRouter.get("/", itemsController.itemsListGet);
-itemsRouter.get("/new", itemsController.itemsCreateGet);
-itemsRouter.post("/new", itemsController.itemsCreatePost);
-itemsRouter.get("/:id", itemsController.itemsDetailGet);
-itemsRouter.post("/:id/delete", itemsController.itemsDeletePost);
-itemsRouter.get("/:id/update", itemsController.itemsUpdateGet);
-itemsRouter.post("/:id/update", itemsController.itemsUpdatePost);
+itemsRouter.get("/", getAllItems);
+itemsRouter.get("/:id", getItemById);
 
-module.exports = itemsRouter;
+itemsRouter.post("/", createItem);
+
+itemsRouter.put("/:id", updateItem);
+
+itemsRouter.delete("/:id", deleteItem);
+
+itemsRouter.get("/categories", getAllCategories);
+
+export default = itemsRouter;
