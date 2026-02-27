@@ -5,21 +5,18 @@ async function getAllItems() {
   return rows;
 }
 
-
 async function getItemById(id) {
   const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
   return rows[0];
 }
 
-
 async function createItem(name, brand, price, year, description, category_id) {
   const { rows } = await pool.query(
     "INSERT INTO items (name, brand, price, year, description, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [name, brand, price, year, description, category_id]
+    [name, brand, price, year, description, category_id],
   );
   return rows[0];
 }
-
 
 async function updateItem(
   id,
@@ -28,18 +25,21 @@ async function updateItem(
   price,
   year,
   description,
-  category_id
+  category_id,
 ) {
   const { rows } = await pool.query(
     "UPDATE items SET name = $1, brand = $2, price = $3, year = $4, description = $5, category_id = $6 WHERE id = $7 RETURNING *",
-    [name, brand, price, year, description, category_id, id]
+    [name, brand, price, year, description, category_id, id],
   );
   return rows[0];
 }
 
-
 async function deleteItem(id) {
-  await pool.query("DELETE FROM items WHERE id = $1", [id]);
+  const { rows } = await pool.query(
+    "DELETE FROM items WHERE id = $1 RETURNING *",
+    [id],
+  );
+  return rows[0];
 }
 
 //Categories
@@ -49,7 +49,6 @@ async function getAllCategories() {
   return rows;
 }
 
-
 async function getCategoryById(id) {
   const { rows } = await pool.query("SELECT * FROM categories WHERE id = $1", [
     id,
@@ -57,30 +56,30 @@ async function getCategoryById(id) {
   return rows[0];
 }
 
-
 async function createCategory(name, description) {
   const { rows } = await pool.query(
     "INSERT INTO categories (name, description) VALUES ($1, $2) RETURNING *",
-    [name, description]
+    [name, description],
   );
   return rows[0];
 }
-
 
 async function updateCategory(id, name, description) {
   const { rows } = await pool.query(
     "UPDATE categories SET name = $1, description = $2 WHERE id = $3 RETURNING *",
-    [name, description, id]
+    [name, description, id],
   );
   return rows[0];
 }
 
-
 async function deleteCategory(id) {
-  await pool.query("DELETE FROM categories WHERE id = $1", [id]);
+  const { rows } = await pool.query("DELETE FROM categories WHERE id = $1 RETURNING *", [
+    id,
+  ]);
+  return rows[0];
 }
 
-module.exports = {
+export {
   getAllItems,
   getItemById,
   createItem,
