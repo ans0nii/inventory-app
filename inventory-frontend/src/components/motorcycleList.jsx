@@ -27,7 +27,7 @@ function MotorcycleList() {
     }
   };
 
-  if (loading) return <div>Loading motorcycle...</div>;
+  if (loading) return <div>Loading motorcycles...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
