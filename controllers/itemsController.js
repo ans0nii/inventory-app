@@ -1,4 +1,6 @@
-import db from "../db/queries.js";
+import * as db from "../db/queries.js";
+
+
 export const getAllItems = async (req, res) => {
   try {
     const items = await db.getAllItems();

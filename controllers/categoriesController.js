@@ -1,4 +1,4 @@
-import db from "../db/queries.js";
+import * as db from "../db/queries.js";
 
 export const getAllCategories = async (req, res) => {
   try {

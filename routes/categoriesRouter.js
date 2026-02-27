@@ -4,7 +4,7 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
-} from "../db/queries.js";
+} from "../controllers/categoriesController.js";
 
 const { Router } = express;
 const categoriesRouter = Router();

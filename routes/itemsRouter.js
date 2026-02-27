@@ -5,7 +5,7 @@ import {
   createItem,
   updateItem,
   deleteItem,
-} from "../db/queries.js";
+} from "../controllers/itemsController.js";
 import express from "express";
 const { Router } = express;
 const itemsRouter = Router();
