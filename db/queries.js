@@ -1,4 +1,4 @@
-const pool = require("./pool");
+import pool from "./pool.js";
 
 async function getAllItems() {
   const { rows } = await pool.query("SELECT * FROM items");
@@ -73,9 +73,10 @@ async function updateCategory(id, name, description) {
 }
 
 async function deleteCategory(id) {
-  const { rows } = await pool.query("DELETE FROM categories WHERE id = $1 RETURNING *", [
-    id,
-  ]);
+  const { rows } = await pool.query(
+    "DELETE FROM categories WHERE id = $1 RETURNING *",
+    [id],
+  );
   return rows[0];
 }
 

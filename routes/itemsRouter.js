@@ -5,7 +5,7 @@ import {
   createItem,
   updateItem,
   deleteItem,
-} from "../db/queries";
+} from "../db/queries.js";
 import express from "express";
 const { Router } = express;
 const itemsRouter = Router();

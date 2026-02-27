@@ -6,6 +6,9 @@ import {
   deleteCategory,
 } from "../db/queries.js";
 
+const { Router } = express;
+const categoriesRouter = Router();
+
 categoriesRouter.get("/", getAllCategories);
 categoriesRouter.post("/", createCategory);
 categoriesRouter.put("/:id", updateCategory);

@@ -1,23 +1,24 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import categoriesRouter from "./routes/categoriesRouter.js";
+import itemsRouter from "./routes/itemsRouter.js";
+
 const app = express();
-const categoriesRouter = require("./routes/categoriesRouter");
-const itemsRouter = require("./routes/itemsRouter");
-const path = require("node:path");
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.use(cors());
+app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
-app.use("/categories", categoriesRouter);
-app.use("/items", itemsRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/items", itemsRouter);
 
 app.get("/", (req, res) => {
-    res.render('index')
-})
-const PORT = 3000;
+  res.json({ message: "Inventory is running" });
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
-    if(error){
-        throw error;
-    }
-    console.log(`Server is running on ${PORT}`);
+  if (error) {
+    throw new Error("Failed to launch inventory");
+  }
+  console.log(`Inventory is running on ${PORT}`);
 });
