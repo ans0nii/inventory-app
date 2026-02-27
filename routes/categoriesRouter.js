@@ -1,13 +1,14 @@
-const { Router } = require("express");
-const categoriesController = require("../controllers/categoriesController");
-const categoriesRouter = Router();
+import express from "express";
+import {
+  getAllCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from "../db/queries.js";
 
-categoriesRouter.get("/", categoriesController.categoriesListGet);
-categoriesRouter.get("/new", categoriesController.categoriesCreateGet);
-categoriesRouter.get("/:id", categoriesController.categoriesDetailGet);
-categoriesRouter.post("/new", categoriesController.categoriesCreatePost);
-categoriesRouter.get("/:id/update", categoriesController.categoriesUpdateGet);
-categoriesRouter.post("/:id/delete", categoriesController.categoriesDeletePost);
-categoriesRouter.post("/:id/update", categoriesController.categoriesUpdatePost);
+categoriesRouter.get("/", getAllCategories);
+categoriesRouter.post("/", createCategory);
+categoriesRouter.put("/:id", updateCategory);
+categoriesRouter.delete("/:id", deleteCategory);
 
-module.exports = categoriesRouter;
+export default categoriesRouter;

@@ -1,49 +1,66 @@
-const db = require("../db/queries");
+import db from "../db/queries.js";
 
-exports.categoriesListGet = async (req, res) => {
+export const getAllCategories = async (req, res) => {
   try {
     const categories = await db.getAllCategories();
 
-    if(!categories){
-      res.status(404).json({error: "Failed to find categories"})
+    if (!categories) {
+      res.status(404).json({ error: "Failed to find categories" });
       return;
     }
 
-    res.render(categories);
+    res.json(categories);
   } catch {
-    res.status(500).json({error: "Failed to fetch categoris"})
+    res.status(500).json({ error: "Failed to fetch categories" });
   }
 };
 
-exports.categoriesCreateGet = (req, res) => {
-  res.render("categories/form", {category: null});
+export const createCategory = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    const newCategories = await db.createCategory(name, description);
+
+    if (!newCategories) {
+      res.status(400).json({ error: "Failed to create category" });
+      return;
+    }
+
+    res.status(201).json(newCategories);
+  } catch {
+    res.status(500).json({ error: "Failed to fetch categories" });
+  }
 };
 
-exports.categoriesDetailGet = async (req, res) => {
-  const id = req.params.id;
-  const category = await db.getCategoryById(id);
-  res.render("categories/detail", {category})
+export const updateCategory = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { name, description } = req.body;
+
+    if (!name || !description) {
+      res.status(400).json({ error: "Failed to update task" });
+      return;
+    }
+
+    const updatedCategory = await db.updateCategory(id, name, description);
+
+    res.json(updatedCategory);
+  } catch {
+    res.status(500).json({ error: "Failed to fetch categories" });
+  }
 };
 
-exports.categoriesCreatePost = async (req, res) => {
-  const { name, description } = req.body;
-  await db.createCategory(name, description);
-  res.redirect("/categories");
-};
+export const deleteCategory = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedCategory = await db.deleteCategory(id);
 
+    if (!deletedCategory) {
+      res.status(404).json({ error: "Failed to delete category " });
+      return;
+    }
 
-exports.categoriesDeletePost = async (req, res) => {
-  await db.deleteCategory(req.params.id);
-  res.redirect("/categories");
-};
-
-exports.categoriesUpdateGet = async (req, res) => {
-  const category = await db.getCategoryById(req.params.id);
-  res.render("categories/form", { category });
-};
-
-exports.categoriesUpdatePost = async (req, res) => {
-  const { name, description } = req.body;
-  await db.updateCategory(req.params.id, name, description);
-  res.redirect("/categories/" + req.params.id);
+    res.json(deletedCategory);
+  } catch {
+    res.status(500).json({ error: "Failed to fetch categories" });
+  }
 };
