@@ -1,8 +1,8 @@
 {
-  "name": "inventory-app",
+  "name": "motorcycle-inventory-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "REST API for managing motorcycle dealership inventory with PostgreSQL database",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
@@ -12,17 +12,24 @@
     "type": "git",
     "url": "git+https://github.com/ans0nii/inventory-app.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "motorcycle",
+    "inventory",
+    "api",
+    "express",
+    "postgresql",
+    "rest",
+    "dealership"
+  ],
+  "author": "ans0nii",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/ans0nii/inventory-app/issues"
   },
   "homepage": "https://github.com/ans0nii/inventory-app#readme",
   "dependencies": {
     "dotenv": "^17.2.3",
-    "ejs": "^3.1.10",
     "express": "^5.2.1",
     "express-validator": "^7.3.1",
     "pg": "^8.16.3"
