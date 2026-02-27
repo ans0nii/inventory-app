@@ -21,4 +21,4 @@ itemsRouter.delete("/:id", deleteItem);
 
 itemsRouter.get("/categories", getAllCategories);
 
-export default = itemsRouter;
+export default itemsRouter;
