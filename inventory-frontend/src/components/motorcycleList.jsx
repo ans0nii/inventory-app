@@ -35,11 +35,8 @@ function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
           {motorcycles.map((bike) => (
             <div key={bike.id}>
               <h3>
-                {bike.brand} ({bike.name})
+                {bike.year} {bike.brand} ({bike.name})
               </h3>
-              <p>
-                <strong>Year:</strong> ${bike.year}
-              </p>
               <p>
                 <strong>Price:</strong> ${Number(bike.price).toLocaleString()}
               </p>
