@@ -33,12 +33,19 @@ function App() {
     setMotorcycles((prev) => [...prev, newMotorcycle]);
   };
 
+  const handleMotorcycleDeleted = (deletedId) => {
+    setMotorcycles((prev) => prev.filter((bike) => bike.id !== deletedId));
+  };
+
   if (loading) return <div>Loading app...</div>;
 
   return (
     <div className="App">
       <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
-      <MotorcycleList motorcycles={motorcycles} />
+      <MotorcycleList
+        motorcycles={motorcycles}
+        onMotorcycleDeleted={handleMotorcycleDeleted}
+      />
     </div>
   );
 }
