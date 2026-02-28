@@ -6,6 +6,7 @@ import "./App.css";
 function App() {
   const [motorcycles, setMotorcycles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchMotorcycles();
@@ -37,13 +38,22 @@ function App() {
     setMotorcycles((prev) => prev.filter((bike) => bike.id !== deletedId));
   };
 
+  const filteredMotorcycles = motorcycles.filter((bikes) =>
+    bikes.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
   if (loading) return <div>Loading app...</div>;
 
   return (
     <div className="App">
       <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
+
+      <div>
+        <label>Search Motorcycles </label>
+        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by name..."/>
+      </div>
       <MotorcycleList
-        motorcycles={motorcycles}
+        motorcycles={filteredMotorcycles}
         onMotorcycleDeleted={handleMotorcycleDeleted}
       />
     </div>
