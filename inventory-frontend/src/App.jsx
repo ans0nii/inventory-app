@@ -7,6 +7,7 @@ function App() {
   const [motorcycles, setMotorcycles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetchMotorcycles();
@@ -46,11 +47,23 @@ function App() {
 
   return (
     <div className="App">
-      <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
+      <button onClick={() => setShowForm(!showForm)}>
+        {" "}
+        {showForm ? "Hide Form" : "Add New Motorcycle"}
+      </button>
 
-      <div>
-        <label>Search Motorcycles </label>
-        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by name..."/>
+      {showForm && (
+        <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
+      )}
+      <h1 className="moto-title">Motorycle Inventory</h1>
+      <div className="moto-search">
+        <label>Search Motorcycles :</label>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by model..."
+        />
       </div>
       <MotorcycleList
         motorcycles={filteredMotorcycles}

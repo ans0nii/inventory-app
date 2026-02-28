@@ -76,14 +76,13 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
   };
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "20px", margin: "20px" }}>
-      <h2>Add New Motorcycle</h2>
+    <div className="motorcycle-form">
 
       {error && <div>Error: {error}</div>}
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
+        <div className="form-item">
+          <label>Model: </label>
           <input
             type="text"
             name="name"
@@ -93,7 +92,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div>
+        <div className="form-item">
           <label>Brand: </label>
           <input
             type="text"
@@ -104,7 +103,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div>
+        <div className="form-item">
           <label>Price: </label>
           <input
             type="number"
@@ -114,7 +113,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div>
+        <div className="form-item">
           <label>Year: </label>
           <input
             type="number"
@@ -124,7 +123,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div>
+        <div className="form-item">
           <label>Description: </label>
           <textarea
             name="description"

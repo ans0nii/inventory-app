@@ -27,11 +27,10 @@ function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
   };
   return (
     <div>
-      <h1> Motorcycle Inventory</h1>
       {motorcycles.length === 0 ? (
         <p>No motorcycles found</p>
       ) : (
-        <div>
+        <div className="bike-info">
           {motorcycles.map((bike) => (
             <div key={bike.id}>
               <h3>
