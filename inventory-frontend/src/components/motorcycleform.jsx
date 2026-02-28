@@ -140,3 +140,5 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
     </div>
   );
 }
+
+export default AddMotorCycleForm;
