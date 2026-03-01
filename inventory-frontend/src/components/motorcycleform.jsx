@@ -41,17 +41,20 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
       setLoading(true);
       setError("");
 
-      const response = await fetch("https://inventory-app-production-49ee.up.railway.app/api/items", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://inventory-app-production-49ee.up.railway.app/api/items",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            price: parseInt(formData.price) || 0,
+            year: parseInt(formData.year) || 0,
+          }),
         },
-        body: JSON.stringify({
-          ...formData,
-          price: parseInt(formData.price) || 0,
-          year: parseInt(formData.year) || 0,
-        }),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Failed to add motorcycle");
@@ -77,7 +80,6 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
 
   return (
     <div className="motorcycle-form">
-
       {error && <div>Error: {error}</div>}
 
       <form onSubmit={handleSubmit}>
@@ -130,6 +132,19 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
             value={formData.description}
             onChange={handleChange}
           />
+        </div>
+
+        <div className="form-item">
+          <label>Category: </label>
+          <select
+            name="category_id"
+            value={formData.category_id}
+            onChange={handleChange}
+          >
+            <option value={1}>Sport</option>
+            <option value={2}>Supersport</option>
+            <option value={3}>Touring</option>
+          </select>
         </div>
 
         <button type="submit" disabled={loading}>
