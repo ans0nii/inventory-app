@@ -8,7 +8,7 @@ function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/items/${motorcycleId}`,
+        `https://inventory-app-production-49ee.up.railway.app/api/items${motorcycleId}`,
         {
           method: "DELETE",
         },
