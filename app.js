@@ -15,6 +15,13 @@ app.get("/", (req, res) => {
   res.json({ message: "Inventory is running" });
 });
 
+app.get("/routes", (req,res) => {
+  res.json({
+    message: "Routes test",
+    availableRoutes: ["/api/categories", "/api/items"]
+  })
+})
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
   if (error) {
