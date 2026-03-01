@@ -2,10 +2,12 @@
 A full-stack motorcycle dealership inventory application built with React and Express.
 
 ## Live Demo
-* **Frontend:** 
-* **Backend API:**
+* **Frontend:** https://inventory-app-4enp.vercel.app/
+* **Backend API:** https://inventory-app-production-49ee.up.railway.app
 
 ## Screenshot
+<img width="1593" height="1076" alt="image" src="https://github.com/user-attachments/assets/d9137596-6383-41d4-b45a-9d538a5648d0" /> | <img width="1399" height="1205" alt="image" src="https://github.com/user-attachments/assets/9b54a60a-fae0-431a-a1f9-67ce84fb9d9f" />
+
 
 
 ## Features
