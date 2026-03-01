@@ -58,7 +58,8 @@
   flex-direction: column;
 }
 
-.form-item label {
+.form-item label
+.form-item select {
   font-size: 14px;
   margin-bottom: 4px;
   font-weight: 500;
