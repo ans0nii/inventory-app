@@ -1,5 +1,5 @@
 # Motorcycle Inventory Management System
-A full-stack motorcycle dealership inventory application built with React and Express.
+A full-stack motorcycle inventory application built with React and Express.
 
 ## Live Demo
 * **Frontend:** https://inventory-app-4enp.vercel.app/
