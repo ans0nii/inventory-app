@@ -16,7 +16,7 @@ function App() {
   const fetchMotorcycles = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/items");
+      const response = await fetch("http://inventory-app-production-49ee.up.railway.app/api/items");
 
       if (!response.ok) {
         throw new Error(`HTTP Error! status : ${response.status}`);
