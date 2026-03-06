@@ -48,17 +48,20 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
       setLoading(true);
       setError("");
 
-      const response = await fetch("http://inventory-app-production-49ee.up.railway.app/api/items", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://inventory-app-production-49ee.up.railway.app/api/items",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            price: parseInt(formData.price) || 0,
+            year: parseInt(formData.year) || 0,
+          }),
         },
-        body: JSON.stringify({
-          ...formData,
-          price: parseInt(formData.price) || 0,
-          year: parseInt(formData.year) || 0,
-        }),
-      });
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
