@@ -6,32 +6,45 @@ A full-stack motorcycle dealership inventory application built with React and Ex
 * **Backend API:** https://inventory-app-production-49ee.up.railway.app
 
 ## Screenshot
-<img width="1431" height="1177" alt="image" src="https://github.com/user-attachments/assets/ab5a008d-34ae-4b27-a4f8-97028f015c51" />  <img width="1653" height="1188" alt="image" src="https://github.com/user-attachments/assets/3070be54-eb4e-4693-ac0f-b20183a65096" />
-
-
-
-
+<img width="1580" height="1017" alt="image" src="https://github.com/user-attachments/assets/0735e11b-ba4d-40b6-976a-e60a4b99caf5" />
+<img width="1273" height="1186" alt="image" src="https://github.com/user-attachments/assets/789b883b-cab7-40b4-a04b-96cb483041e7" />
 
 ## Features
-* View all motorcycles in a responsive grid layout
-* Add new motorcycles with detailed information
-* Search motorcycles by mdoel in real-time
-* Delete motorcycles with confirmation dialog
+* View all motorcycles in a responsive CSS Grid layout
+* Add new motorcycles with comprehensive form validation
+* Real-time search and filtering by model name
+* Delete motorcycles with confirmation dialogs
 * Responsive design for desktop and mobile
-* Toggle form visibility for clean interface
+* Toggle form visibility for clean user interface
+
+## Security & Validation
+* XSS attack prevention (Front and backend sanitization)
+* Input length validation and character limits
+* Server-side data validation
+
+## User Experience
+* Fully responsive design for desktop, tablet and mobile
+* CSS modules for component-scoped styling
 
 ## Technologies Used
 **Frontend:**
 * React with Hooks (useState, useEffect)
+* CSS modules
 * JavaScript ES6+
 * CSS3 with responsive grid layout
 * Vite for build tooling
 
 **Backend:**
 * Express.js REST API
-* PostgreSQL database
-* Node.js
+* PostgreSQL database with parameterized queries
+* Node.js runtime
+* Input sanitization
 * CORS middleware for cross-origin requests
+
+## Deployment
+* Frontend: Vercel with automatic deployments
+* Backend: Railway with PostgreSQL database
+* Environment variable management
 
 ## API Endpoints
 * `GET /api/items` - Fetch all motorcycles
