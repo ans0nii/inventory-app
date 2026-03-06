@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MotorcycleList from "./components/motorcycleList";
-import AddMotorCycleForm from "./components/motorcycleform";
-import "./App.css";
+import AddMotorCycleForm from "./components/addmotorcycleform";
+import styles from "./app.module.css";
 
 function App() {
   const [motorcycles, setMotorcycles] = useState([]);
@@ -16,7 +16,7 @@ function App() {
   const fetchMotorcycles = async () => {
     try {
       setLoading(true);
-      const response = await fetch("https://inventory-app-production-49ee.up.railway.app/api/items");
+      const response = await fetch("http://localhost:3000/api/items");
 
       if (!response.ok) {
         throw new Error(`HTTP Error! status : ${response.status}`);
@@ -46,25 +46,30 @@ function App() {
   if (loading) return <div>Loading app...</div>;
 
   return (
-    <div className="App">
-      <button onClick={() => setShowForm(!showForm)}>
-        {" "}
-        {showForm ? "Hide Form" : "Add New Motorcycle"}
-      </button>
+    <div className={styles.app}>
+      <h1 className={styles.motoTitle}>Motorcycle Inventory</h1>
 
-      {showForm && (
-        <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
-      )}
-      <h1 className="moto-title">Motorycle Inventory</h1>
-      <div className="moto-search">
-        <label>Search Motorcycles :</label>
+      <div className={styles.motoSearch}>
+
+        {showForm && (
+          <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
+        )}
+        <br />
+        <label>Search Motorcycles:</label>
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by model..."
-        />
+          />
+        <button
+          className={styles.toggleBtn}
+          onClick={() => setShowForm(!showForm)}
+          >
+          {showForm ? "Hide Form" : "Add New Motorcycle"}
+        </button>
       </div>
+
       <MotorcycleList
         motorcycles={filteredMotorcycles}
         onMotorcycleDeleted={handleMotorcycleDeleted}
