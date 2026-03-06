@@ -1,3 +1,5 @@
+import styles from "./motorcyclelist.module.css";
+
 function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
   const handleDelete = async (motorcycleId, motorcycleName) => {
     if (
@@ -8,7 +10,7 @@ function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
 
     try {
       const response = await fetch(
-        `https://inventory-app-production-49ee.up.railway.app/api/items/${motorcycleId}`,
+        `http://localhost:3000/api/items/${motorcycleId}`,
         {
           method: "DELETE",
         },
@@ -28,11 +30,11 @@ function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
   return (
     <div>
       {motorcycles.length === 0 ? (
-        <p>No motorcycles found</p>
+        <p className={styles.noMotorcycles}>No motorcycles found</p>
       ) : (
-        <div className="bike-info">
+        <div className={styles.bikeInfo}>
           {motorcycles.map((bike) => (
-            <div key={bike.id}>
+            <div key={bike.id} className={styles.bikeCard}>
               <h3>
                 {bike.year} {bike.brand} ({bike.name})
               </h3>
@@ -42,7 +44,10 @@ function MotorcycleList({ motorcycles, onMotorcycleDeleted }) {
               <p>
                 <strong>Description:</strong> {bike.description}
               </p>
-              <button onClick={() => handleDelete(bike.id, bike.name)}>
+              <button
+                className={styles.deleteBtn}
+                onClick={() => handleDelete(bike.id, bike.name)}
+              >
                 Delete
               </button>
             </div>

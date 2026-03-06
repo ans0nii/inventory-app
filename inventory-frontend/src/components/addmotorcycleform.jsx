@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import styles from "./addmotorcycleform.module.css";
 function AddMotorCycleForm({ onMotorcycleAdded }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -12,11 +12,18 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const sanitizeInput = (input) => {
+    return input
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+      .replace(/javascript:/gi, "")
+      .replace(/on\w+="[^"]*"/gi, "");
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: sanitizeInput(value),
     }));
 
     if (error) {
@@ -41,23 +48,21 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
       setLoading(true);
       setError("");
 
-      const response = await fetch(
-        "https://inventory-app-production-49ee.up.railway.app/api/items",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-            price: parseInt(formData.price) || 0,
-            year: parseInt(formData.year) || 0,
-          }),
+      const response = await fetch("http://localhost:3000/api/items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          ...formData,
+          price: parseInt(formData.price) || 0,
+          year: parseInt(formData.year) || 0,
+        }),
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to add motorcycle");
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP ${response.status}`);
       }
 
       const newMotorcycle = await response.json();
@@ -72,6 +77,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
         category_id: 1,
       });
     } catch (error) {
+      console.log("Full error:", error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -79,11 +85,11 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
   };
 
   return (
-    <div className="motorcycle-form">
-      {error && <div>Error: {error}</div>}
+    <div className={styles.motorcycleForm}>
+      {error && <div className={styles.error}>Error: {error}</div>}
 
       <form onSubmit={handleSubmit}>
-        <div className="form-item">
+        <div className={styles.formItem}>
           <label>Model: </label>
           <input
             type="text"
@@ -94,7 +100,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div className="form-item">
+        <div className={styles.formItem}>
           <label>Brand: </label>
           <input
             type="text"
@@ -105,7 +111,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div className="form-item">
+        <div className={styles.formItem}>
           <label>Price: </label>
           <input
             type="number"
@@ -115,7 +121,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div className="form-item">
+        <div className={styles.formItem}>
           <label>Year: </label>
           <input
             type="number"
@@ -125,16 +131,17 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           />
         </div>
 
-        <div className="form-item">
+        <div className={styles.formItem}>
           <label>Description: </label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
+            maxLength="50"
           />
         </div>
 
-        <div className="form-item">
+        <div className={styles.formItem}>
           <label>Category: </label>
           <select
             name="category_id"
@@ -147,7 +154,7 @@ function AddMotorCycleForm({ onMotorcycleAdded }) {
           </select>
         </div>
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading} className={styles.submitBtn}>
           {loading ? "Adding..." : "Add Motorcycle"}
         </button>
       </form>
