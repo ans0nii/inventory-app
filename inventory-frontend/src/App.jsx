@@ -16,7 +16,9 @@ function App() {
   const fetchMotorcycles = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://inventory-app-production-49ee.up.railway.app/api/items");
+      const response = await fetch(
+        "https://inventory-app-production-49ee.up.railway.app/api/items",
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP Error! status : ${response.status}`);
@@ -50,7 +52,6 @@ function App() {
       <h1 className={styles.motoTitle}>Motorcycle Inventory</h1>
 
       <div className={styles.motoSearch}>
-
         {showForm && (
           <AddMotorCycleForm onMotorcycleAdded={handleMotorcycleAdded} />
         )}
@@ -61,11 +62,11 @@ function App() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by model..."
-          />
+        />
         <button
           className={styles.toggleBtn}
           onClick={() => setShowForm(!showForm)}
-          >
+        >
           {showForm ? "Hide Form" : "Add New Motorcycle"}
         </button>
       </div>
